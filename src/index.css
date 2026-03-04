@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --mil-bg: #0a0e14;
+  --mil-panel: #0d1117;
+  --mil-border: #1e2a3a;
+  --mil-accent: #00b4d8;
+  --mil-green: #00ff88;
+  --mil-red: #ff3333;
+  --mil-yellow: #ffd600;
+  --mil-orange: #ff8c00;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--mil-bg);
+  color: #c9d1d9;
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+}
+
+/* Leaflet dark overrides */
+.leaflet-container {
+  background: #060a10;
+}
+
+.leaflet-tile-pane {
+  filter: brightness(0.75) saturate(0.55) contrast(1.1);
+}
+
+/* Kill default Leaflet tooltip white box */
+.leaflet-tooltip {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  color: inherit !important;
+}
+
+.leaflet-tooltip::before {
+  display: none !important;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--mil-panel);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--mil-border);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--mil-accent);
+}
+
+/* Glow effects */
+.glow-green {
+  text-shadow: 0 0 8px var(--mil-green);
+}
+.glow-red {
+  text-shadow: 0 0 8px var(--mil-red);
+}
+.glow-accent {
+  text-shadow: 0 0 8px var(--mil-accent);
+}
+
+/* Scan line effect */
+@keyframes scanline {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100vh; }
+}
+
+.panel-bg {
+  background: var(--mil-panel);
+  border: 1px solid var(--mil-border);
+}
+
+/* Pulse animation for active threats */
+@keyframes threat-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.threat-active {
+  animation: threat-pulse 1.5s ease-in-out infinite;
+}
+
+/* Blink for critical */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.blink {
+  animation: blink 0.8s step-end infinite;
+}
+
+/* Log entry fade-in */
+@keyframes log-in {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.log-entry {
+  animation: log-in 0.2s ease-out;
+}
+
+/* Button base */
+.mil-btn {
+  @apply px-3 py-1.5 text-xs font-mono font-semibold uppercase tracking-wider
+         border transition-all duration-150 cursor-pointer select-none;
+}
+
+.mil-btn-primary {
+  @apply mil-btn bg-transparent border-mil-accent text-mil-accent
+         hover:bg-mil-accent hover:text-mil-bg;
+}
+
+.mil-btn-danger {
+  @apply mil-btn bg-transparent border-mil-red text-mil-red
+         hover:bg-mil-red hover:text-white;
+}
+
+.mil-btn-success {
+  @apply mil-btn bg-transparent border-mil-green text-mil-green
+         hover:bg-mil-green hover:text-mil-bg;
+}
+
+.mil-btn-neutral {
+  @apply mil-btn bg-transparent border-mil-dim text-mil-dim
+         hover:border-mil-accent hover:text-mil-accent;
+}
+
+/* Scenario buttons */
+.scenario-btn {
+  @apply w-full text-left px-3 py-2 text-xs font-mono border border-mil-border
+         text-gray-400 hover:border-mil-accent hover:text-mil-accent
+         hover:bg-mil-accent/5 transition-all duration-150 cursor-pointer;
+}
+
+.scenario-btn.active {
+  @apply border-mil-accent text-mil-accent bg-mil-accent/10;
+}
